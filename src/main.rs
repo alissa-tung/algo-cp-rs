@@ -1,1 +1,3 @@
+mod loj;
+
 fn main() {}

@@ -16,14 +16,14 @@ pub fn main() {
     let mut acc: u64 = 0;
     let mut ys: Vec<u32> = vec![];
     for x in xs.iter() {
-        if ys.len() == 0 || ys.last().unwrap() < x {
+        if ys.is_empty() || ys.last().unwrap() < x {
             ys.push(*x)
         } else if ys.last().unwrap() == x {
         } else {
-            acc += (ys.last().unwrap().clone() - x) as u64;
+            acc += (ys.last().unwrap() - x) as u64;
             ys = vec![*x];
         }
     }
-    acc += ys.last().unwrap().clone() as u64;
+    acc += *ys.last().unwrap() as u64;
     println!("{}", acc)
 }

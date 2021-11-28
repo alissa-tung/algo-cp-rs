@@ -1,4 +1,4 @@
-use std::{convert::TryInto, io};
+use std::io;
 #[allow(dead_code)]
 
 pub fn main() {
@@ -44,7 +44,7 @@ fn find(xs: &mut Vec<u32>, x: u32) -> u32 {
     let p = xs[x as usize];
     if p != x {
         xs[x as usize] = find(xs, p);
-        return xs[x as usize];
+        xs[x as usize]
     } else {
         p
     }

@@ -77,17 +77,29 @@ fn suc(xs: &Option<Box<N>>, x: i32) -> Option<i32> {
 }
 
 fn rank(xs: &Option<Box<N>>, x: i32) -> u32 {
-    // #TODO: Use s.
     if xs.is_none() {
         0
     } else {
         match xs.as_ref().unwrap().kvn.1.cmp(&x) {
+            Equal => {
+                if xs.as_ref().unwrap().l.is_some() {
+                    xs.as_ref().unwrap().l.as_ref().unwrap().s
+                } else {
+                    0
+                }
+            }
             Less => {
                 xs.as_ref().unwrap().kvn.2
-                    + rank(&xs.as_ref().unwrap().l, x)
+                    + ({
+                        if xs.as_ref().unwrap().l.is_some() {
+                            xs.as_ref().unwrap().l.as_ref().unwrap().s
+                        } else {
+                            0
+                        }
+                    })
                     + rank(&xs.as_ref().unwrap().r, x)
             }
-            _ => rank(&xs.as_ref().unwrap().l, x),
+            Greater => rank(&xs.as_ref().unwrap().l, x),
         }
     }
 }
